@@ -186,7 +186,7 @@ public class pantalla extends JFrame {
         };
         btn0.addActionListener(agregar0);
 
-        JButton btnBorrar = new JButton("C");
+        JButton btnBorrar = new JButton("AC");
         panelInicio.add(btnBorrar);
         btnBorrar.setBounds(226, 220, 50, 30);
 
@@ -195,7 +195,7 @@ public class pantalla extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 String union = "";
-                for (int i = 0; i < txtValor1.getText().length() - 1; i++) {
+                for (int i = 0; i < txtValor1.getText().length() - 100; i++) {
                     union = union + txtValor1.getText().charAt(i);
                 }
 
@@ -225,7 +225,7 @@ public class pantalla extends JFrame {
 
         JButton btnIgual = new JButton("=");
         panelInicio.add(btnIgual);
-        btnIgual.setBounds(120, 260, 150, 30);
+        btnIgual.setBounds(120, 260, 100, 30);
         ActionListener resultado = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -234,7 +234,12 @@ public class pantalla extends JFrame {
                     resultado = valor1 + Integer.parseInt(txtValor1.getText());
                 } else if (simbolo == '-') {
                     resultado = valor1 - Integer.parseInt(txtValor1.getText());
+                }else if (simbolo == '*') {
+                    resultado = valor1 * Integer.parseInt(txtValor1.getText());
+                }else if (simbolo == '/') {
+                    resultado = valor1 / Integer.parseInt(txtValor1.getText());
                 }
+                
                 txtValor1.setText(String.valueOf(resultado));
                 valor1 = 0;
 
@@ -269,7 +274,17 @@ public class pantalla extends JFrame {
         ActionListener mul = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            
+             if (txtValor1.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un valor");
+                } else {
+                    if (valor1 == 0) {
+                        valor1 = Integer.parseInt(txtValor1.getText());
+                    } else {
+                        valor1 *= Integer.parseInt(txtValor1.getText());
+                    }
+                    simbolo = '*';
+                    txtValor1.setText("");
+                }
             }
         };
         btnMul.addActionListener(mul);
@@ -280,8 +295,16 @@ public class pantalla extends JFrame {
         ActionListener div = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (txtValor1.getText().equals("")) {
+                 if (txtValor1.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Debe ingresar un valor");
+                } else {
+                    if (valor1 == 0) {
+                        valor1 = Integer.parseInt(txtValor1.getText());
+                    } else {
+                        valor1 /= Integer.parseInt(txtValor1.getText());
+                    }
+                    simbolo = '/';
+                    txtValor1.setText("");
                 }
                    
             }
@@ -319,7 +342,28 @@ public class pantalla extends JFrame {
                 txtValor1.setText(union);
             }
         };
+         
         btnPun.addActionListener(pun);
+         JButton btnBorrar1 = new JButton("C");
+        panelInicio.add(btnBorrar1);
+        btnBorrar1.setBounds(226, 260,50, 30);
+
+        ActionListener borrar1 = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String union = "";
+                for (int i = 0; i < txtValor1.getText().length() - 1; i++) {
+                    union = union + txtValor1.getText().charAt(i);
+                }
+
+                txtValor1.setText(union);
+
+            }
+        };
+
+        btnBorrar1.addActionListener(borrar1);
+
     }
 
 }
